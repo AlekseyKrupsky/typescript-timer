@@ -55,7 +55,7 @@ const run = async () => {
     }
 
     const startMessage = `Total timer time is: ${getTimeDiffFormatted(
-        diffInSecondsFromStart
+      diffInSecondsFromStart
     )}`;
 
     console.info(startMessage);

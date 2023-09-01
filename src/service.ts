@@ -35,15 +35,16 @@ export const getTimeDiffFromNow = (endTime: string): number => {
 
 export const printTimerStatus = (diffInSecondsFromStart, endTime): void => {
   const timeDiffFromNow = getTimeDiffFromNow(endTime);
-  const progress = Math.round((1 - timeDiffFromNow / diffInSecondsFromStart) * 10000) / 100;
+  const progress =
+    Math.round((1 - timeDiffFromNow / diffInSecondsFromStart) * 10000) / 100;
 
   const remainTimeMessage = `Remain time is: ${getTimeDiffFormatted(
-      timeDiffFromNow
+    timeDiffFromNow
   )}. Progress: ${progress}%       \r`;
 
   process.stdout.write(remainTimeMessage);
 };
 
 export const getCurrentLocaleTimeString = () => {
-  return new Date().toLocaleTimeString('en-GB')
-}
+  return new Date().toLocaleTimeString('en-GB');
+};
