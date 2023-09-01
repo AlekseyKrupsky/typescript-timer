@@ -1,8 +1,10 @@
 {
   "compilerOptions": {
-    "target": "es2017",
-  },
-  "include": [
-    "*.ts"
-  ]
+    "target": "es2015",
+    "lib": [
+      "ES2021.String"
+    ],
+    "strictNullChecks": true,
+    "allowSyntheticDefaultImports": true,
+  }
 }

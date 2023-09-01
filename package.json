@@ -1,18 +1,24 @@
 {
   "name": "timer",
   "version": "1.0.0",
-  "description": "",
+  "description": "Desc",
   "main": "dist/index.js",
   "scripts": {
-    "start": "ts-node src/index.ts"
+    "start": "ts-node src/index.ts --downlevelIteration",
+    "lint": "tslint -c tslint.json 'src/**/*.ts'",
+    "lint:test": "tslint -c tslint.json 'test/**/*.ts'",
+    "prettier-format": "prettier --config .prettierrc 'src/**/*.ts' --write"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@types/node": "^20.5.7",
-    "promisify": "^0.0.3",
+    "promisify": "^0.0.3"
+  },
+  "devDependencies": {
+    "@types/node": "^18.7.2",
+    "prettier": "^3.0.3",
     "ts-node": "^10.9.1",
     "tslint": "^6.1.3",
-    "typescript": "^5.2.2"
+    "typescript": "^4.9.5"
   }
 }
