@@ -3,6 +3,7 @@ import { stdin as input, stdout as output } from 'node:process';
 import { validateTimeString } from './validator';
 import { promisify } from 'util';
 import {
+  getCurrentLocaleTimeString,
   getTimeDiff,
   getTimeDiffFormatted,
   printTimerStatus
@@ -15,8 +16,8 @@ const run = async () => {
 
     const question = promisify(rl.question);
 
-    const currentDateTime = new Date();
-    const currentTimeFormatted = currentDateTime.toLocaleTimeString();
+    const currentTimeFormatted = getCurrentLocaleTimeString();
+
     const startTimeQuestion = `Please enter start time (default ${currentTimeFormatted}):`;
     const endTimeQuestion = 'Please enter end time:';
 
@@ -29,6 +30,7 @@ const run = async () => {
       startTime = currentTimeFormatted;
     } else {
       validateTimeString(startTime, 'Invalid start time');
+
       const startTimeDiffWithCurrent = getTimeDiff(
         startTime,
         currentTimeFormatted
@@ -55,6 +57,7 @@ const run = async () => {
     const startMessage = `Total timer time is: ${getTimeDiffFormatted(
         diffInSecondsFromStart
     )}`;
+
     console.info(startMessage);
 
     setInterval(() => {

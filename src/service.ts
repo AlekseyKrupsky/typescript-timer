@@ -2,7 +2,6 @@ import { getTimeParts } from './validator';
 
 export const SECONDS_IN_HOUR = 3600;
 export const SECONDS_IN_MINUTE = 60;
-export const MINUTES_IN_HOUR = 60;
 export const SECONDS_IN_SECOND = 1;
 
 const timeMultipliers = [SECONDS_IN_HOUR, SECONDS_IN_MINUTE, SECONDS_IN_SECOND];
@@ -31,7 +30,7 @@ export const getTimeDiffFormatted = (diffInSeconds: number): string => {
 };
 
 export const getTimeDiffFromNow = (endTime: string): number => {
-  return getTimeDiff(new Date().toLocaleTimeString(), endTime);
+  return getTimeDiff(getCurrentLocaleTimeString(), endTime);
 };
 
 export const printTimerStatus = (diffInSecondsFromStart, endTime): void => {
@@ -40,7 +39,11 @@ export const printTimerStatus = (diffInSecondsFromStart, endTime): void => {
 
   const remainTimeMessage = `Remain time is: ${getTimeDiffFormatted(
       timeDiffFromNow
-  )}. Progress: ${progress}%\r`;
+  )}. Progress: ${progress}%       \r`;
 
   process.stdout.write(remainTimeMessage);
 };
+
+export const getCurrentLocaleTimeString = () => {
+  return new Date().toLocaleTimeString('en-GB')
+}
