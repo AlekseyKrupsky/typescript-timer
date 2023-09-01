@@ -6,5 +6,7 @@
     ],
     "strictNullChecks": true,
     "allowSyntheticDefaultImports": true,
+    "outDir": "dist/",
+    "moduleResolution": "node"
   }
 }

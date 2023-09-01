@@ -4,10 +4,12 @@
   "description": "Desc",
   "main": "dist/index.js",
   "scripts": {
-    "start": "ts-node src/index.ts --downlevelIteration",
+    "start": "node dist/index.js",
+    "start:dev": "ts-node src/index.ts --downlevelIteration",
     "lint": "tslint -c tslint.json 'src/**/*.ts'",
     "lint:test": "tslint -c tslint.json 'test/**/*.ts'",
-    "prettier": "prettier --config .prettierrc 'src/**/*.ts' --write"
+    "prettier": "prettier --config .prettierrc 'src/**/*.ts' --write",
+    "build": "tsc"
   },
   "author": "",
   "license": "ISC",
