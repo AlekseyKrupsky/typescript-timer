@@ -1,6 +1,5 @@
 import { ValidationError } from './errors';
-
-export const TIME_PARTS = 3;
+import { TIME_PARTS } from './constants';
 
 export const validateTimeString = (
   time: string,

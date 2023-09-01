@@ -9,6 +9,7 @@ import {
   printTimerStatus
 } from './service';
 import { ValidationError } from './errors';
+import { QUIT_LINE } from './constants';
 
 const run = async () => {
   try {
@@ -18,8 +19,8 @@ const run = async () => {
 
     const currentTimeFormatted = getCurrentLocaleTimeString();
 
-    const startTimeQuestion = `Please enter start time (default ${currentTimeFormatted}):`;
-    const endTimeQuestion = 'Please enter end time:';
+    const startTimeQuestion = `Please enter start time (default ${currentTimeFormatted}): `;
+    const endTimeQuestion = 'Please enter end time: ';
 
     let startTime: string = (await question.call(
       rl,
@@ -59,6 +60,16 @@ const run = async () => {
     )}`;
 
     console.info(startMessage);
+
+    rl.on('line', (line: string) => {
+      if (line === QUIT_LINE) {
+        process.stdout.write('Exit...\n');
+
+        process.exit(0);
+      }
+    });
+
+    printTimerStatus(diffInSecondsFromStart, endTime);
 
     setInterval(() => {
       printTimerStatus(diffInSecondsFromStart, endTime);

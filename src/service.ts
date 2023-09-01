@@ -1,10 +1,5 @@
 import { getTimeParts } from './validator';
-
-export const SECONDS_IN_HOUR = 3600;
-export const SECONDS_IN_MINUTE = 60;
-export const SECONDS_IN_SECOND = 1;
-
-const timeMultipliers = [SECONDS_IN_HOUR, SECONDS_IN_MINUTE, SECONDS_IN_SECOND];
+import { TIME_MULTIPLIERS } from './constants';
 
 export const getTimeDiff = (startTime: string, endTime: string): number => {
   const startTimeParts = getTimeParts(startTime);
@@ -12,11 +7,11 @@ export const getTimeDiff = (startTime: string, endTime: string): number => {
 
   let diffInSeconds: number = 0;
 
-  for (const timeMultiplierIndex of Object.keys(timeMultipliers)) {
+  for (const timeMultiplierIndex of Object.keys(TIME_MULTIPLIERS)) {
     diffInSeconds +=
       (parseInt(endTimeParts[timeMultiplierIndex], 10) -
         parseInt(startTimeParts[timeMultiplierIndex], 10)) *
-      timeMultipliers[timeMultiplierIndex];
+      TIME_MULTIPLIERS[timeMultiplierIndex];
   }
 
   return diffInSeconds;
@@ -35,14 +30,22 @@ export const getTimeDiffFromNow = (endTime: string): number => {
 
 export const printTimerStatus = (diffInSecondsFromStart, endTime): void => {
   const timeDiffFromNow = getTimeDiffFromNow(endTime);
-  const progress =
-    Math.round((1 - timeDiffFromNow / diffInSecondsFromStart) * 10000) / 100;
 
-  const remainTimeMessage = `Remain time is: ${getTimeDiffFormatted(
-    timeDiffFromNow
-  )}. Progress: ${progress}%       \r`;
+  if (timeDiffFromNow > 0) {
+    const progress =
+      Math.round((1 - timeDiffFromNow / diffInSecondsFromStart) * 10000) / 100;
 
-  process.stdout.write(remainTimeMessage);
+    const remainTimeMessage = `Timer is running. Enter 'q' to exit. Remain time is: ${getTimeDiffFormatted(
+      timeDiffFromNow
+    )}. Progress: ${progress}%       \r`;
+
+    process.stdout.write(remainTimeMessage);
+
+    return;
+  }
+
+  process.stdout.write('It`s time!\n');
+  process.exit(0);
 };
 
 export const getCurrentLocaleTimeString = () => {
