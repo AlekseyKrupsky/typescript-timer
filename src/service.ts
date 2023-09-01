@@ -1,5 +1,6 @@
 import { getTimeParts } from './validator';
 import { TIME_MULTIPLIERS } from './constants';
+import * as notifier from 'node-notifier';
 
 export const getTimeDiff = (startTime: string, endTime: string): number => {
   const startTimeParts = getTimeParts(startTime);
@@ -44,7 +45,18 @@ export const printTimerStatus = (diffInSecondsFromStart, endTime): void => {
     return;
   }
 
-  process.stdout.write('It`s time!\n');
+  const timerEndMessage = 'It`s time!';
+
+  try {
+    notifier.notify({
+      title: 'Timer',
+      message: timerEndMessage
+    });
+  } catch (e) {
+    console.log(e.message);
+  }
+
+  process.stdout.write(`\n${timerEndMessage}\n`);
   process.exit(0);
 };
 
