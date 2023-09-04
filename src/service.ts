@@ -1,6 +1,6 @@
 import { getTimeParts } from './validator';
 import { TIME_MULTIPLIERS } from './constants';
-import * as notifier from 'node-notifier';
+const notifier = require('node-notifier');
 
 export const getTimeDiff = (startTime: string, endTime: string): number => {
   const startTimeParts = getTimeParts(startTime);
@@ -29,7 +29,7 @@ export const getTimeDiffFromNow = (endTime: string): number => {
   return getTimeDiff(getCurrentLocaleTimeString(), endTime);
 };
 
-export const printTimerStatus = (diffInSecondsFromStart: number, endTime: string): void => {
+export const printTimerStatus = (diffInSecondsFromStart: number, endTime: string): boolean => {
   const timeDiffFromNow = getTimeDiffFromNow(endTime);
 
   if (timeDiffFromNow > 0) {
@@ -42,7 +42,7 @@ export const printTimerStatus = (diffInSecondsFromStart: number, endTime: string
 
     process.stdout.write(remainTimeMessage);
 
-    return;
+    return false;
   }
 
   const timerEndMessage = 'It`s time!';
@@ -57,7 +57,8 @@ export const printTimerStatus = (diffInSecondsFromStart: number, endTime: string
   }
 
   process.stdout.write(`\n${timerEndMessage}\n`);
-  process.exit(0);
+
+  return true;
 };
 
 export const getCurrentLocaleTimeString = (): string => {

@@ -71,8 +71,15 @@ const run = async (): Promise<void> => {
 
     printTimerStatus(diffInSecondsFromStart, endTime);
 
-    setInterval(() => {
-      printTimerStatus(diffInSecondsFromStart, endTime);
+    const intervalId = setInterval(() => {
+      const isEnd = printTimerStatus(diffInSecondsFromStart, endTime);
+
+      if (!isEnd) {
+        return;
+      }
+
+      clearInterval(intervalId);
+      rl.close();
     }, 1000);
   } catch (e) {
     if (e instanceof ValidationError) {
