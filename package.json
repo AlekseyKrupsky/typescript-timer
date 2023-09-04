@@ -4,7 +4,7 @@
   "description": "Desc",
   "main": "dist/index.js",
   "scripts": {
-    "start": "node dist/index.js",
+    "start": "tsc && node dist/index.js",
     "start:dev": "ts-node src/index.ts --downlevelIteration",
     "lint": "tslint -c tslint.json 'src/**/*.ts'",
     "lint:test": "tslint -c tslint.json 'test/**/*.ts'",

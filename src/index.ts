@@ -11,7 +11,7 @@ import {
 import { ValidationError } from './errors';
 import { QUIT_LINE } from './constants';
 
-const run = async () => {
+const run = async (): Promise<void> => {
   try {
     const rl = readline.createInterface({ input, output });
 
@@ -22,10 +22,10 @@ const run = async () => {
     const startTimeQuestion = `Please enter start time (default ${currentTimeFormatted}): `;
     const endTimeQuestion = 'Please enter end time: ';
 
-    let startTime: string = (await question.call(
+    let startTime: string = await question.call(
       rl,
       startTimeQuestion
-    )) as string;
+    ) as unknown as string;
 
     if (startTime === '') {
       startTime = currentTimeFormatted;
@@ -45,7 +45,7 @@ const run = async () => {
     const endTime: string = (await question.call(
       rl,
       endTimeQuestion
-    )) as string;
+    )) as unknown as string;
 
     validateTimeString(endTime, 'Invalid end time');
 

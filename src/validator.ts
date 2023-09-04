@@ -4,7 +4,7 @@ import { TIME_PARTS } from './constants';
 export const validateTimeString = (
   time: string,
   errorMessage: string = 'Invalid time format'
-) => {
+): void => {
   const startTimeParts = getTimeParts(time);
 
   if (startTimeParts.length !== TIME_PARTS) {
@@ -16,11 +16,11 @@ export const validateTimeString = (
   }
 };
 
-export const getTimeParts = (time: string) => {
+export const getTimeParts = (time: string): string[] => {
   return time.trim().split(':');
 };
 
-const validateTimePart = (timePart: string, errorMessage: string) => {
+const validateTimePart = (timePart: string, errorMessage: string): void => {
   if (timePart.length > 2) {
     throw new ValidationError(errorMessage);
   }

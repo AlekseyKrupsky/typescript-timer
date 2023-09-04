@@ -8,7 +8,7 @@ export const getTimeDiff = (startTime: string, endTime: string): number => {
 
   let diffInSeconds: number = 0;
 
-  for (const timeMultiplierIndex of Object.keys(TIME_MULTIPLIERS)) {
+  for (const timeMultiplierIndex of TIME_MULTIPLIERS.keys()) {
     diffInSeconds +=
       (parseInt(endTimeParts[timeMultiplierIndex], 10) -
         parseInt(startTimeParts[timeMultiplierIndex], 10)) *
@@ -29,7 +29,7 @@ export const getTimeDiffFromNow = (endTime: string): number => {
   return getTimeDiff(getCurrentLocaleTimeString(), endTime);
 };
 
-export const printTimerStatus = (diffInSecondsFromStart, endTime): void => {
+export const printTimerStatus = (diffInSecondsFromStart: number, endTime: string): void => {
   const timeDiffFromNow = getTimeDiffFromNow(endTime);
 
   if (timeDiffFromNow > 0) {
@@ -52,7 +52,7 @@ export const printTimerStatus = (diffInSecondsFromStart, endTime): void => {
       title: 'Timer',
       message: timerEndMessage
     });
-  } catch (e) {
+  } catch (e: any) {
     console.log(e.message);
   }
 
@@ -60,6 +60,6 @@ export const printTimerStatus = (diffInSecondsFromStart, endTime): void => {
   process.exit(0);
 };
 
-export const getCurrentLocaleTimeString = () => {
+export const getCurrentLocaleTimeString = (): string => {
   return new Date().toLocaleTimeString('en-GB');
 };

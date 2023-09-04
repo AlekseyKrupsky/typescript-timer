@@ -4,7 +4,7 @@ export const SECONDS_IN_HOUR = 3600;
 export const SECONDS_IN_MINUTE = 60;
 export const SECONDS_IN_SECOND = 1;
 
-export const TIME_MULTIPLIERS = [
+export const TIME_MULTIPLIERS: number[] = [
   SECONDS_IN_HOUR,
   SECONDS_IN_MINUTE,
   SECONDS_IN_SECOND

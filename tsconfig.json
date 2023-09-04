@@ -1,12 +1,11 @@
 {
+  "extends": "@tsconfig/node16/tsconfig.json",
   "compilerOptions": {
-    "target": "es2015",
-    "lib": [
-      "ES2021.String"
-    ],
     "strictNullChecks": true,
     "allowSyntheticDefaultImports": true,
-    "outDir": "dist/",
+    "outDir": "dist",
     "moduleResolution": "node"
-  }
+  },
+  "include": ["src", "tests"],
+  "exclude": ["node_modules"]
 }
